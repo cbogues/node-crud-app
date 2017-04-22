@@ -1,0 +1,29 @@
+<div class="jumbotron text-center">
+	<h1>All Matchups</h1>
+</div>
+
+<table class="table table-bordered table-hover table-striped">
+	<thead>
+		<tr>
+			<th>Matchup Name</th>
+			<th>Description</th>
+			<th></th>
+		</tr>
+	</thead>
+
+
+	<tbody>
+		
+		<% for (var matchup of matchups) { %>
+			<tr>
+				<td><%= matchup.name %></td>
+				<td><%= matchup.description %></td>
+				<td>
+					<a href="/matchups/<%= matchup.slug %>" class="btn btn-sm btn-primary">View</a>
+				</td>
+			</tr>
+
+		<% }  %>
+
+	</tbody>
+</table>
