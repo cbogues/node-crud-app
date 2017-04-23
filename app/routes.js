@@ -16,3 +16,8 @@ router.get('/', mainController.showHome);
 
 //event routes
 router.get('/matchups', matchupsController.showMatchups);
+router.get('/matchups/:slug', matchupsController.showSingle);
+
+//create events
+//edit events
+//delete events

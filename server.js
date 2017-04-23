@@ -2,9 +2,11 @@
 const express  = require('express'),
 	app = express(),
 	port = process.env.PORT || 8080,
-	expressLayouts = require('express-ejs-layouts');
+	expressLayouts = require('express-ejs-layouts'),
+	mongoose = require('mongoose');
 
-// configure application
+
+// configure application =================
 // tell express where to look for static assets
 app.use(express.static(__dirname + '/public')); 
 
@@ -13,7 +15,10 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
-// set routes
+// conncect to database ====================
+mongoose.connect('mongodb://Doom:Valeria4@ds115671.mlab.com:15671/playoff-matchups');
+
+// set routes   ===================
 // app.get('/', function(req, res) {
 // 	res.send('Hello, I am the app!');
 // });
@@ -26,7 +31,7 @@ app.use(require('./app/routes'));
 // });
 
 
-// start server
+// start server ======================
 app.listen(port, () =>  {
 	console.log(`App listening on http://localhost:${port}`);
 });
