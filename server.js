@@ -1,3 +1,7 @@
+//load environment variables
+
+require('dotenv').config();
+
 // grab dependencies
 const express  = require('express'),
 	app = express(),
@@ -16,7 +20,7 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
 // conncect to database ====================
-mongoose.connect('mongodb://Doom:Valeria4@ds115671.mlab.com:15671/playoff-matchups');
+mongoose.connect(process.env.DB_URI);
 
 // set routes   ===================
 // app.get('/', function(req, res) {
