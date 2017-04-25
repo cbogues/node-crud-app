@@ -1,3 +1,5 @@
+const Matchup = require('../models/matchup');
+
 module.exports = {
 
 	// show all events
