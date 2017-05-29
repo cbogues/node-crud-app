@@ -13,16 +13,16 @@ const mongoose = require('mongoose'),
 
 	// middleware ================
 	// make sure the slug is created from the name
-	matchupSchema.pre('save', function(next){
+	matchupSchema.pre('save', function(next) {
 		this.slug = slugify(this.name);
 		next();
 	});
 
 	// create the model
-	const = matchupModel = mongoose.model('Matchup', matchupSchema);
+	const matchupModel = mongoose.model('Matchup', matchupSchema);
 
 	// export the model
-	module.exports = matchupSchema;
+	module.exports = matchupModel;
 
 	// function to slugify a name
 	function slugify(text) {

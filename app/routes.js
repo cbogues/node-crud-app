@@ -2,7 +2,7 @@
 
 const express= require('express'),
 	router = express.Router(),
-	mainController = require('./controllers/mainController');
+	mainController = require('./controllers/mainController'),
 	matchupsController = require('./controllers/matchupsController');
 
 
@@ -16,8 +16,13 @@ router.get('/', mainController.showHome);
 
 //event routes
 router.get('/matchups', matchupsController.showMatchups);
-router.get('/matchups/:slug', matchupsController.showSingle);
 
-//create events
-//edit events
-//delete events
+// seed matchups
+router.get('/matchups/seed', matchupsController.seedMatchups);
+
+//create matchups
+//edit matchups
+//delete matchups
+
+// show a single matchup
+router.get('/matchups/:slug', matchupsController.showSingle);
