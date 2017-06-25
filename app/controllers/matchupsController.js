@@ -3,7 +3,9 @@ const Matchup = require('../models/matchup');
 module.exports = {
 	showMatchups: showMatchups,
 	showSingle: showSingle,
-	seedMatchups: seedMatchups
+	seedMatchups: seedMatchups,
+	showCreate: showCreate,
+	processCreate: processCreate
 }
 
 
@@ -34,7 +36,10 @@ module.exports = {
 				}
 
 
-			res.render('pages/single', { matchup: matchup });
+			res.render('pages/single', { 
+				matchup: matchup,
+				success: req.flash('success')
+			 });
 
 			});
  		
@@ -63,3 +68,40 @@ module.exports = {
 			//seeded!
 			res.send('Database seeded!');
 		}
+		/**
+		 *
+		 * Show the create form
+		 */
+		function showCreate(req, res) {
+			res.render('pages/create');
+		}
+
+		/**
+		 * Placeholder for the process creation form
+		 */
+		
+		function processCreate(req,res) {
+			// create a new Matchup
+			const matchup = new Matchup({
+				name: req.body.name,
+				description: req.body.description
+			});
+			// save the matchup
+			matchup.save((err) => {
+				if (err)
+					throw err;
+
+			// set a successful flash message
+			req.flash('success', 'Successfully created event!');
+				
+				//redirect to the newly created matchup
+				res.redirect(`/matchups/${matchup.slug}`);
+			});
+		}
+
+
+
+
+
+
+		
