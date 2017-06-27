@@ -2,12 +2,22 @@
 // var Promise = require("bluebird");
 require('dotenv').config();
 
+// for mongoose library
+const mongoose = require('mongoose')
+mongoose.Promise = global.Promise // <--
+const Schema = mongoose.Schema
+const UserSchema = new Schema({
+  name: String,
+})
+const User = mongoose.model('user', UserSchema)
+module.exports = User;
+
+
 // grab dependencies
 const express  = require('express'),
 	app = express(),
 	port = process.env.PORT || 8080,
 	expressLayouts = require('express-ejs-layouts'),
-	mongoose = require('mongoose'),
 	bodyParser = require('body-parser'),
 	session = require('express-session'),
 	cookieParser = require('cookie-parser'),

@@ -80,7 +80,7 @@ module.exports = {
 		 * Placeholder for the process creation form
 		 */
 		
-		function processCreate(req,res) {
+		function processCreate(req, res) {
 			// create a new Matchup
 			const matchup = new Matchup({
 				name: req.body.name,
@@ -90,9 +90,7 @@ module.exports = {
 			matchup.save((err) => {
 				if (err)
 					throw err;
-
-			// set a successful flash message
-			req.flash('success', 'Successfully created event!');
+				
 				
 				//redirect to the newly created matchup
 				res.redirect(`/matchups/${matchup.slug}`);
