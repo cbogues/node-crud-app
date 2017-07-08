@@ -90,8 +90,11 @@ module.exports = {
 			matchup.save((err) => {
 				if (err)
 					throw err;
+
+			// set a successful flash message
+			req.flash('success', 'Successfully created event!');
 				
-				
+
 				//redirect to the newly created matchup
 				res.redirect(`/matchups/${matchup.slug}`);
 			});
