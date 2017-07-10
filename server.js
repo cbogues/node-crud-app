@@ -21,7 +21,8 @@ const express  = require('express'),
 	bodyParser = require('body-parser'),
 	session = require('express-session'),
 	cookieParser = require('cookie-parser'),
-	flash = require('connect-flash');
+	flash = require('connect-flash'),
+	expressValidator = require('express-validator');
 
 
 
@@ -51,6 +52,7 @@ mongoose.connect(process.env.DB_URI);
 
 // use body parser to grab info from a form
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
 
 
 
