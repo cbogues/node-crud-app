@@ -7,7 +7,8 @@ module.exports = {
 	showCreate: showCreate,
 	processCreate: processCreate,
 	showEdit: showEdit,
-	processEdit: processEdit
+	processEdit: processEdit,
+	deleteMatchup: deleteMatchup
 }
 
 
@@ -162,9 +163,20 @@ module.exports = {
 				res.redirect('/matchups');
 			});
 		});
-		
+	
 	}
 
+	/**
+	 * Delete an event
+	 */
+	 function deleteMatchup(req, res) {
+	 	Matchup.remove({ slug: req.params.slug  }, (err) => {
+	 		// set flash data
+	 		// redirect to the matchups page
+	 		req.flash('success', 'Matchup deleted!');
+	 		res.redirect('/matchups');
+	 	});
+	 }
 
 
 
