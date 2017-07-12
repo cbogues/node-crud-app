@@ -25,6 +25,9 @@ router.get('/matchups/create', matchupsController.showCreate);
 router.post('/matchups/create', matchupsController.processCreate);
 
 //edit matchups
+router.get('/matchups/:slug/edit', matchupsController.showEdit);
+router.post('/matchups/:slug', matchupsController.processEdit);
+
 //delete matchups
 
 // show a single matchup

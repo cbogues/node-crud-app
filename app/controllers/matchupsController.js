@@ -5,7 +5,9 @@ module.exports = {
 	showSingle: showSingle,
 	seedMatchups: seedMatchups,
 	showCreate: showCreate,
-	processCreate: processCreate
+	processCreate: processCreate,
+	showEdit: showEdit,
+	processEdit: processEdit
 }
 
 
@@ -19,7 +21,10 @@ module.exports = {
 			}
 
 		// return a view with data
-		res.render('pages/matchups', {matchups: matchups});
+		res.render('pages/matchups', {
+				matchups: matchups,
+				success: req.flash('success')
+			});
 
 		});
 
@@ -113,6 +118,52 @@ module.exports = {
 			});
 		}
 
+		/** 
+		 * Show the edit form
+		 */
+		function showEdit(req, res) {
+			Matchup.findOne({ slug: req.params.slug }, (err, matchup) => {
+				res.render('pages/edit', {
+					matchup: matchup,
+					errors: req.flash('errors')
+				});
+			});
+		}
+
+		/**
+		 * Process the edit form
+		 */
+		function processEdit(req, res) {
+			//validate information
+			req.checkBody('name', 'Name is required.').notEmpty();
+			req.checkBody('description', 'Description is required.').notEmpty();
+
+			//if there are errors, redirect and save errors to flash
+			const errors = req.validationErrors();
+			if (errors) {
+				req.flash('errors', errors.map(err => err.msg));
+				return res.redirect(`/matchups/${req.params.slug}/edit`);
+			}
+
+		// finding a current event
+		Matchup.findOne({ slug: req.params.slug }, (err, matchup) => {
+			// updating that event
+			matchup.name = req.body.name;
+			matchup.description = req.body.description;
+
+			matchup.save((err) =>{
+				if (err)
+					throw err;
+
+
+			//success flash message
+			//redirect back to the /events 
+				req.flash('success', 'Successfully updated matchup.');
+				res.redirect('/matchups');
+			});
+		});
+		
+	}
 
 
 
